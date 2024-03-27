@@ -1,1 +1,11 @@
-<h1>Name of the list</h1>
+<%= link_to "Add a movie", new_list_bookmark_path(@list.id), class: 'btn bnt-primary' %>
+<div class="container">
+  <h1><%= @list.name %></h1>
+  <% @list.movies.each do |movie| %>
+    <%= bookmark = Bookmark.find_by(list: @list, movie: movie) %>
+    <img src="<%= movie.poster_url %>" >
+    <%= movie.title %>
+    <%= movie.rating %>
+    <%= movie.overview %>
+  <% end %>
+</div>

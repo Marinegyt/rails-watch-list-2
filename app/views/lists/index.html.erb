@@ -1,0 +1,11 @@
+<%= render 'shared/navbar' %>
+<h1>Save all kind of movies</h1>
+<h3>My lists</h3>
+ <div class="cards">
+      <% @lists.each do |list| %>
+        <div class="card-category"
+          style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path list.photo.key, height: 300, crop: :fill %>')">
+           <%= link_to (list.name), list_path(list.id) %>
+        </div>
+      <% end %>
+  </div>

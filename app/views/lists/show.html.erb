@@ -1,13 +1,23 @@
 <%= render 'shared/navbar' %>
 <div class="container mb-5">
-  <%= link_to "Add a movie", new_list_bookmark_path(@list.id), class: 'btn btn-primary mb-3' %>
   <h1><%= @list.name %></h1>
-  <% @list.movies.each do |movie| %>
-    <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
-    <img src="<%= movie.poster_url %>" >
-    <h2><%= movie.title %></h2>
-    <p><%= movie.rating %></p>
-    <p><%= movie.overview %></p>
-    <h2><%= link_to 'Delete', bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "T'es sûr wesh ? Chauuuuud..."} %></h2>
-  <% end %>
+  <div class="d-flex justify-content-end">
+    <%= link_to "Add a movie", new_list_bookmark_path(@list.id), class: 'btn btn-primary mb-3' %>
+  </div>
+    <% @list.movies.each do |movie| %>
+      <div class="card-movie m-3">
+        <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
+        <img src="<%= movie.poster_url%>" >
+        <div class="card-movie-infos">
+          <div>
+            <h2><%= movie.title %></h2>
+            <p><%= movie.rating %></p>
+            <p><%= movie.overview %></p>
+          </div>
+          <div class="d-flex justify-content-end">
+            <small class="btn-delete flex-shrink-0"><%= link_to 'Delete', bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "T'es sûr wesh ? Chauuuuud..."}, class: 'text-danger' %></small>
+          </div>
+        </div>
+    </div>
+    <% end %>
 </div>
